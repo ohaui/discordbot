@@ -102,3 +102,8 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# tokens
+DANBOORUTOKEN.txt
+TOKEN.txt
+/myCatPics
