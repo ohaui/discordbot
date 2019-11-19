@@ -31,8 +31,7 @@ async def on_message(message):
         await message.channel.send('{} {}'.format(message.author.mention, random.choice(asksSosiList)))
     await client.process_commands(message)
     if str(message.author) == 'DuckLuck 🌹#0666':
-        await message.channel.send('''↑↑↑↑↑↑↑↑↑↑↑↑
-клоун сказал''')
+        await message.channel.send('↑↑↑↑↑↑↑↑↑↑↑↑ \nклоун сказал')
 
 
 @client.command(pass_context=True)
