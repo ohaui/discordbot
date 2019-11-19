@@ -12,7 +12,7 @@ user = discord.user
 client.remove_command('help')
 
 
-#TODO разобраться почему запрос score:1000 занимает так много времени
+
 
 #########################
 
@@ -87,11 +87,7 @@ async def danbooru(ctx):
             await ctx.send('в этом посте нет картинки, попробуй снова'.format(mention))
             print('NO PICTURE IN THIS POST')
         else:
-            await ctx.send(post_data[0] + '''
-#############################################################
-
-            artist - {}
-            score - {}'''.format(post_data[2],post_data[1]))
+            await ctx.send(post_data[0] + '\n####################################################\nartist - {}\nscore - {}'.format(post_data[2],post_data[1]))
             print('the picture from danbooru was sent successfully!')
     except pybooru.exceptions.PybooruHTTPError:
         await ctx.send('{}, нельзя запросить больше 2-ух тегов!'.format(mention))
