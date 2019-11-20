@@ -1,12 +1,11 @@
 import requests
-import pathlib
 import json
 import os
 import random
 import sys
 from PIL import Image, ImageFilter
 
-myCatPicDir = pathlib.Path ("D:/")/"Projects"/"new"/"discordBot"/"resources"/"myCatPics"
+myCatPicDir = 'myCatPics'
 # путь к папке с котами
 
 def getCat():
