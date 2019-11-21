@@ -98,4 +98,6 @@ async def danbooru(ctx):
         await ctx.send('{}, бот не подключен к VPN'.format(mention))
     except TypeError:
         await ctx.send('{}, параметр к тегу задан неверно, либо другая ошибка'.format(mention))
+    except Exception as e:
+        await ctx.send('{}, {}'.format(mention, e))
 client.run(TOKEN.read())
