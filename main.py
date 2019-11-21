@@ -99,5 +99,6 @@ async def danbooru(ctx):
     except TypeError:
         await ctx.send('{}, параметр к тегу задан неверно, либо другая ошибка'.format(mention))
     except Exception as e:
-        await ctx.send('{}, {}'.format(mention, e))
+        #await ctx.send('{}, {}'.format(mention, e))
+        print(e)
 client.run(TOKEN.read())
