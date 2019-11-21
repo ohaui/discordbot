@@ -5,6 +5,7 @@ import discord
 #TODO разобраться почему запрос score:1000 занимает так много времени
 rd = open("resources/DANBOORUTOKEN.txt", "r") #никнейм и токен на данбоору
 tokens = rd.readlines()
+rd.close()
 booru = client = Danbooru('danbooru', username=tokens[0], api_key=tokens[2])
 def getLinkBoorus(tags):
         getpicture = booru.post_list(tags=tags, random=True, limit = 1)
