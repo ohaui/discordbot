@@ -1,6 +1,5 @@
 import discord
 import random
-import re
 import pybooru
 from resources.booruapi import getLinkBoorus
 from resources.answersAskList import answersSosiList, randomSosiList, asksSosiList
@@ -30,7 +29,7 @@ async def on_message(message):
     if any(word in content.lower() for word in answersSosiList):
         await message.channel.send('{} {}'.format(message.author.mention, random.choice(asksSosiList)))
     await client.process_commands(message)
-    if str(message.author) == 'DuckLuck 🌹#0666':
+    if str(message.author) == '':
         await message.channel.send('↑↑↑↑↑↑↑↑↑↑↑↑ \nклоун сказал')
 
 
@@ -83,7 +82,7 @@ async def danbooru(ctx):
         replacedcontent = content.replace('.danbooru', '')
         post_data = getLinkBoorus(replacedcontent)
         if post_data[0] == None:
-            await ctx.send('в этом посте нет картинки, попробуй снова'.format(mention))
+            await ctx.send('{}, в этом посте нет картинки, попробуй снова'.format(mention))
             print('NO PICTURE IN THIS POST')
         else:
             await ctx.send(post_data[0] + '\n####################################################\nartist - {}\nscore - {}'.format(post_data[2],post_data[1]))
@@ -98,4 +97,6 @@ async def danbooru(ctx):
         await ctx.send('{}, бот не подключен к VPN'.format(mention))
     except TypeError:
         await ctx.send('{}, параметр к тегу задан неверно, либо другая ошибка'.format(mention))
+    except Exception as e:
+        print(e)
 client.run(TOKEN.read())
