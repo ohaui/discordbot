@@ -1,15 +1,14 @@
 import discord
 import random
+import requests
 import pybooru
 from resources.booruapi import getLinkBoorus
 from resources.answersAskList import answersSosiList, randomSosiList, asksSosiList
 from discord.ext import commands
-from resources.random_cat import getCat, myGetCat, myGetlen, myCatPicDir
+from resources.random_cat import getCat, getMyCatImages, lenMyCatImages, init_myCatImages
 client = commands.Bot(command_prefix='.')
-TOKEN = open("resources\TOKEN.txt", "r")# token
 user = discord.user
 client.remove_command('help')
-
 
 
 
@@ -17,9 +16,10 @@ client.remove_command('help')
 
 @client.event
 async def on_ready():
-    print('logged on in as {}'.format(client.user.name))
+    print('logged in as {}'.format(client.user.name))
     print('id : {}'.format(client.user.id))
     print('discordpy version is {}'.format(discord.__version__))
+    print(init_myCatImages())
     await client.change_presence(activity=discord.Game('Работягу! .help'))
 
 
@@ -58,21 +58,18 @@ async def Cat(ctx):
 
 @client.command(pass_context=True)
 async def myCat(ctx):
-    file = discord.File('{}\{}'.format(myCatPicDir, myGetCat()), myGetCat())
-    await ctx.send("", file=file)
+    await ctx.send(getMyCatImages())
 
 
 @client.command(pass_context=True)
 async def myCatHowMuch(ctx):
-    await ctx.send(myGetlen())
+    await ctx.send(lenMyCatImages())
 
 
 @client.command(pass_context=True)
 async def help(ctx):
-    HELPCOMMANDS = open("resources\HELPCOMMANDS.txt")
-    await ctx.send(HELPCOMMANDS.read())
-    HELPCOMMANDS.close()
-
+    with open("resources\HELPCOMMANDS.txt") as HELPCOMMANDS:
+        await ctx.send(HELPCOMMANDS.read())
 
 @client.command(pass_context=True)
 async def danbooru(ctx):
@@ -99,4 +96,6 @@ async def danbooru(ctx):
         await ctx.send('{}, параметр к тегу задан неверно, либо другая ошибка'.format(mention))
     except Exception as e:
         print(e)
-client.run(TOKEN.read())
+
+with open("resources\TOKEN.txt", "r") as TOKEN: # token
+    client.run(TOKEN.read())
